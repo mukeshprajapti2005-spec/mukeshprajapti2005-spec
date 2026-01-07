@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Magic Gift</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+    margin:0;
+    overflow:hidden;
+    background:#0b7a2a;
+    font-family: Arial, sans-serif;
+    text-align:center;
+    color:white;
+}
+.container{
+    position:relative;
+    z-index:2;
+    margin-top:120px;
+}
+input, button{
+    padding:12px;
+    font-size:18px;
+    border-radius:8px;
+    border:none;
+    margin:8px;
+}
+button{
+    background:#ffcc00;
+    cursor:pointer;
+}
+.gift{
+    font-size:80px;
+    cursor:pointer;
+    display:none;
+}
+iframe{
+    width:90%;
+    height:250px;
+    border-radius:15px;
+}
+
+/* Rain */
+.rain{
+    position:fixed;
+    top:-20px;
+    width:2px;
+    height:20px;
+    background:rgba(255,255,255,0.7);
+    animation:fall linear infinite;
+}
+@keyframes fall{
+    to{ transform:translateY(110vh); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- STEP 1 -->
+    <div id="step1">
+        <h2>Enter your name</h2>
+        <input type="text" id="name" placeholder="Your Name">
+        <br>
+        <button onclick="openGift1()">Submit</button>
+    </div>
+
+    <!-- GIFT 1 -->
+    <div id="gift1" class="gift" onclick="openDOB()">🎁</div>
+
+    <!-- STEP 2 -->
+    <div id="step2" style="display:none;">
+        <h2>What is your Date of Birth?</h2>
+        <input type="date" id="dob">
+        <br>
+        <button onclick="openGift2()">Open Gift</button>
+    </div>
+
+    <!-- GIFT 2 -->
+    <div id="gift2" class="gift" onclick="openVideo()">🎁</div>
+
+    <!-- VIDEO -->
+    <div id="video" style="display:none;">
+        <h2>Special Surprise 🎉</h2>
+        <iframe 
+        src="https://www.youtube.com/embed/0e3GPea1Tyg"
+        allowfullscreen></iframe>
+    </div>
+
+</div>
+
+<script>
+// Rain create
+for(let i=0;i<120;i++){
+    let drop=document.createElement("div");
+    drop.className="rain";
+    drop.style.left=Math.random()*100+"vw";
+    drop.style.animationDuration=(Math.random()*1+0.5)+"s";
+    document.body.appendChild(drop);
+}
+
+// Functions
+function openGift1(){
+    let n=document.getElementById("name").value;
+    if(n===""){ alert("Name enter karo"); return;}
+    document.getElementById("step1").style.display="none";
+    document.getElementById("gift1").style.display="block";
+}
+
+function openDOB(){
+    document.getElementById("gift1").style.display="none";
+    document.getElementById("step2").style.display="block";
+}
+
+function openGift2(){
+    let d=document.getElementById("dob").value;
+    if(d===""){ alert("DOB select karo"); return;}
+    document.getElementById("step2").style.display="none";
+    document.getElementById("gift2").style.display="block";
+}
+
+function openVideo(){
+    document.getElementById("gift2").style.display="none";
+    document.getElementById("video").style.display="block";
+}
+</script>
+
+</body>
+</html>
